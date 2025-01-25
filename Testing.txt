@@ -22,15 +22,15 @@ local whitelistedPlayers = {
     ["cayyhaunt"] = "[👑]"
 }
 
-game:GetService("RunService").Heartbeat:Connect(function(player)
+local nigger = game:GetService("LocalPlayer")
+
     local success, hasGamePass = pcall(function()
-        return player:HasGamePass(gamepassID)
+        return nigger:HasGamePass(gamepassID)
     end)
 
     if success and hasGamePass then
         whitelistedPlayers[game.Players.LocalPlayer.Name] = "[🎮]"
     end
-end)
 
 -- 
 local function updateDisplayNames()
