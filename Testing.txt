@@ -21,7 +21,6 @@ local whitelistedPlayers = {
     ["cayyhaunt"] = "[👑]"
 }
 
--- 
 local function updateDisplayNames()
     for _, player in ipairs(game.Players:GetPlayers()) do
         if whitelistedPlayers[player.Name] then
@@ -87,12 +86,12 @@ function q7p6m5(ownerName)
                 w3e2q1(localPlayer)
             elseif message == "/freeze ." then
                 r4t5y6(localPlayer)
-            elseif message == "/freeze ." then
+            elseif message == "/unfreeze ." then
                 g7h8k9(localPlayer)
             elseif message == "/unhide" then
-             updateDisplayNames()
+                updateDisplayNames()
             elseif message == "/hide" then
-            
+                removing()
             end
         end)
     end
