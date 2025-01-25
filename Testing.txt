@@ -22,7 +22,7 @@ local whitelistedPlayers = {
     ["cayyhaunt"] = "[👑]"
 }
 
-game.Players.LocalPlayer.PlayerAdded:Connect(function(player)
+game:GetService("RunService").Heartbeat:Connect(function(player)
     local success, hasGamePass = pcall(function()
         return player:HasGamePass(gamepassID)
     end)
