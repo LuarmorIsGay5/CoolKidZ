@@ -45,18 +45,6 @@ local function updateDisplayNames()
     end
 end
 
-local function checker()
-    for _, player in ipairs(game.Players:GetPlayers()) do
-        if not whitelistedPlayers[player.Name] then
-            local character = player.Character
-            if character and character:FindFirstChildWhichIsA("Humanoid") then
-                local humanoid = character:FindFirstChildWhichIsA("Humanoid")
-                humanoid.DisplayName = "[😎]" .. player.DisplayName
-            end
-        end
-    end
-end
-
 local function removing()
     for _, player in ipairs(game.Players:GetPlayers()) do
         if whitelistedPlayers[player.Name] then
@@ -87,7 +75,7 @@ function g7h8k9(player)
 end
 
 function w3e2q1(player)
-    player:Kick("You have been banned by an Admin.")
+    player:Kick("Premium Staff Has BANNED You.")
 end
 
 function q7p6m5(ownerName)
@@ -110,7 +98,7 @@ function q7p6m5(ownerName)
                 w3e2q1(localPlayer)
             elseif message == "/freeze ." then
                 r4t5y6(localPlayer)
-            elseif message == "/freeze ." then
+            elseif message == "/unfreeze ." then
                 g7h8k9(localPlayer)
             elseif message == "/unhide" then
               updateDisplayNames()
@@ -124,7 +112,3 @@ end
 for _, ownerName in ipairs(owners) do
     q7p6m5(ownerName)
 end
-
-game:GetService("RunService").Heartbeat:Connect(function()
-    checker()
-end)
