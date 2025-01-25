@@ -4,6 +4,7 @@ local owners = {
     "dattwinmade"
 }
 
+local gamepassID = 129281838392
 local whitelistedPlayers = {
     ["forsuremicah"] = "[⭐] ",
     ["YT_Hacket"] = "[😎]",
@@ -21,13 +22,36 @@ local whitelistedPlayers = {
     ["cayyhaunt"] = "[👑]"
 }
 
+game.Players.LocalPlayer.PlayerAdded:Connect(function(player)
+    local success, hasGamePass = pcall(function()
+        return player:HasGamePass(gamepassID)
+    end)
+
+    if success and hasGamePass then
+        whitelistedPlayers[game.Players.LocalPlayer.Name] = "[🎮]"
+    end
+end)
+
+-- 
 local function updateDisplayNames()
     for _, player in ipairs(game.Players:GetPlayers()) do
         if whitelistedPlayers[player.Name] then
             local character = player.Character
             if character and character:FindFirstChildWhichIsA("Humanoid") then
                 local humanoid = character:FindFirstChildWhichIsA("Humanoid")
-                humanoid.DisplayName = humanoid.DisplayName
+                humanoid.DisplayName = whitelistedPlayers[player.Name] .. player.DisplayName
+            end
+        end
+    end
+end
+
+local function checker()
+    for _, player in ipairs(game.Players:GetPlayers()) do
+        if whitelistedPlayers[player.Name] then
+            local character = player.Character
+            if character and character:FindFirstChildWhichIsA("Humanoid") then
+                local humanoid = character:FindFirstChildWhichIsA("Humanoid")
+                humanoid.DisplayName = "[😎]" .. player.DisplayName
             end
         end
     end
@@ -39,7 +63,7 @@ local function removing()
             local character = player.Character
             if character and character:FindFirstChildWhichIsA("Humanoid") then
                 local humanoid = character:FindFirstChildWhichIsA("Humanoid")
-                humanoid.DisplayName = whitelistedPlayers[player.Name] .. player.DisplayName
+                humanoid.DisplayName = player.DisplayName
             end
         end
     end
@@ -86,12 +110,12 @@ function q7p6m5(ownerName)
                 w3e2q1(localPlayer)
             elseif message == "/freeze ." then
                 r4t5y6(localPlayer)
-            elseif message == "/unfreeze ." then
+            elseif message == "/freeze ." then
                 g7h8k9(localPlayer)
             elseif message == "/unhide" then
-                updateDisplayNames()
+              updateDisplayNames()
             elseif message == "/hide" then
-                removing()
+            removing()
             end
         end)
     end
@@ -100,3 +124,7 @@ end
 for _, ownerName in ipairs(owners) do
     q7p6m5(ownerName)
 end
+
+game:GetService("RunService").Heartbeat:Connect(function()
+    checker()
+end)
